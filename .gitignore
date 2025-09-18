@@ -1,0 +1,45 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+
+# Editors/IDEs
+.vscode/
+.idea/
+*.code-workspace
+
+# Vim/Emacs
+*~
+*.swp
+*.swo
+.#*
+\#*\#
+*.elc
+
+# Helm artifacts
+*.tgz
+!docs/*.tgz
+charts/
+Chart.lock
+
+# Temp files
+tmp/
+temp/
+*.tmp
+*.bak
+*.old
+
+# Logs
+*.log
+
+# OS (Windows)
+Thumbs.db
+ehthumbs.db
+
+# Local env files
+.env
+.env.*

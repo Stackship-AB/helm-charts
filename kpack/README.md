@@ -5,10 +5,17 @@ This chart **only** installs the upstream **kpack** components (CRDs, controller
 ## Usage
 
 ```bash
-helm install kpack oci://ghcr.io/YOUR_ORG/kpack-installer  # or ./kpack-installer-0.1.0.tgz
+# Option A: Install directly from the packaged chart
+helm install kpack ./kpack-installer-0.1.0.tgz
 
-# Pin a specific version of kpack:
-helm install kpack ./kpack-installer-0.1.0.tgz   --set releaseUrl=https://github.com/buildpacks-community/kpack/releases/download/release-0.13.3/release.yaml
+# Option B: Use the Helm repo on GitHub Pages
+helm repo add stackship https://stackship-ab.github.io/helm-charts
+helm repo update
+helm install kpack stackship/kpack-installer
+
+# Pin a specific version of the upstream kpack release manifest
+helm install kpack stackship/kpack-installer \
+	--set releaseUrl=https://github.com/buildpacks-community/kpack/releases/download/release-0.13.3/release.yaml
 ```
 
 Verify:

@@ -1,0 +1,25 @@
+# OS junk
+.DS_Store
+._*
+Thumbs.db
+
+# VCS
+.git/
+.gitignore
+
+# Editors/IDEs
+.vscode/
+.idea/
+.#*
+*.swp
+*.swo
+*~
+
+# Backups and temp
+*.bak
+*.tmp
+tmp/
+
+# Helm
+charts/
+*.tgz
