@@ -1,3 +1,15 @@
 apiVersion: v1
-entries: {}
-generated: "2025-09-18T17:48:04.751319+02:00"
+entries:
+  kpack-installer:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2025-09-18T17:53:48.441722+02:00"
+    description: Minimal Helm chart that installs (and uninstalls) kpack by applying
+      the official release YAML via Helm hooks.
+    digest: bf1cbaade257a4801a25d77b50ad65b720570cf6fd43197f3951101775f96d81
+    name: kpack-installer
+    type: application
+    urls:
+    - https://stackship-ab.github.io/helm-charts/kpack-installer-0.0.1.tgz
+    version: 0.1.0
+generated: "2025-09-18T17:53:48.439355+02:00"
