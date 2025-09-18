@@ -38,6 +38,10 @@ rules:
   - apiGroups: ["apps"]
     resources: ["deployments","statefulsets","daemonsets","replicasets"]
     verbs: ["get","list","watch","create","update","patch","delete"]
+  # kpack CRs (cluster and namespaced)
+  - apiGroups: ["kpack.io"]
+    resources: ["*"]
+    verbs: ["get","list","watch","create","update","patch","delete"]
   # CRDs
   - apiGroups: ["apiextensions.k8s.io"]
     resources: ["customresourcedefinitions"]
@@ -46,10 +50,14 @@ rules:
   - apiGroups: ["admissionregistration.k8s.io"]
     resources: ["mutatingwebhookconfigurations","validatingwebhookconfigurations"]
     verbs: ["get","list","watch","create","update","patch","delete"]
-  # RBAC objects created by release.yaml
+  # RBAC bindings created by release.yaml
   - apiGroups: ["rbac.authorization.k8s.io"]
-    resources: ["roles","rolebindings","clusterroles","clusterrolebindings"]
+    resources: ["rolebindings","clusterrolebindings"]
     verbs: ["get","list","watch","create","update","patch","delete"]
+  # Allow creating/updating Roles/ClusterRoles that contain permissions we don't currently hold
+  - apiGroups: ["rbac.authorization.k8s.io"]
+    resources: ["roles","clusterroles"]
+    verbs: ["get","list","watch","create","update","patch","delete","escalate","bind"]
   # ServiceMonitor (if present in some distros) - safe optional
   - apiGroups: ["monitoring.coreos.com"]
     resources: ["servicemonitors"]
@@ -57,6 +65,10 @@ rules:
   # PodDisruptionBudget (sometimes used)
   - apiGroups: ["policy"]
     resources: ["poddisruptionbudgets"]
+    verbs: ["get","list","watch","create","update","patch","delete"]
+  # PriorityClasses referenced by release.yaml
+  - apiGroups: ["scheduling.k8s.io"]
+    resources: ["priorityclasses"]
     verbs: ["get","list","watch","create","update","patch","delete"]
   # Events are helpful for status, not strictly required
   - apiGroups: [""]
