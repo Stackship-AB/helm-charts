@@ -1,0 +1,20 @@
+# Values for kpack-installer
+
+# URL to the official kpack release YAML. Pin a specific version if desired.
+releaseUrl: "https://github.com/buildpacks-community/kpack/releases/latest/download/release.yaml"
+
+# Namespace in which the install/uninstall Jobs run (NOT where kpack is installed).
+jobNamespace: kube-system
+
+# Hook RBAC names
+serviceAccountName: kpack-installer
+clusterRoleBindingName: kpack-installer-crb
+
+# Images for the hook Jobs
+images:
+  curl: "curlimages/curl:8.10.1"
+  kubectl: "bitnami/kubectl:1.30"
+
+# Extra args/env you may want to pass to kubectl (e.g., --context, --server). Leave empty for defaults.
+kubectlArgs: []
+kubectlEnv: []

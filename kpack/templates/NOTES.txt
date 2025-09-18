@@ -1,0 +1,9 @@
+kpack was installed using the upstream release manifest.
+
+To verify:
+  kubectl get pods -n kpack
+  kubectl api-resources | grep kpack.io
+
+To uninstall:
+  helm uninstall {{ include "kpack-installer.fullname" . }}
+(Pre-delete hook will remove the kpack resources via `kubectl delete -f` on the same releaseUrl)

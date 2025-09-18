@@ -1,0 +1,41 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "kpack-installer.fullname" . }}-delete
+  namespace: {{ .Values.jobNamespace }}
+  annotations:
+    "helm.sh/hook": pre-delete
+    "helm.sh/hook-weight": "0"
+    "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
+spec:
+  template:
+    spec:
+      serviceAccountName: {{ .Values.serviceAccountName }}
+      restartPolicy: Never
+      volumes:
+        - name: work
+          emptyDir: {}
+      initContainers:
+        - name: fetch
+          image: {{ .Values.images.curl }}
+          imagePullPolicy: IfNotPresent
+          args: ["-fsSL", "{{ .Values.releaseUrl }}", "-o", "/work/release.yaml"]
+          volumeMounts:
+            - name: work
+              mountPath: /work
+      containers:
+        - name: delete
+          image: {{ .Values.images.kubectl }}
+          command: ["/bin/sh","-c"]
+          args:
+            - >-
+              kubectl {{- range .Values.kubectlArgs }} {{ . }} {{- end }}
+              delete -f /work/release.yaml --ignore-not-found && echo 'kpack deleted'
+          env:
+          {{- range .Values.kubectlEnv }}
+            - name: {{ .name | quote }}
+              value: {{ .value | quote }}
+          {{- end }}
+          volumeMounts:
+            - name: work
+              mountPath: /work

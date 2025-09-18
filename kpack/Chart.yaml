@@ -1,0 +1,6 @@
+apiVersion: v2
+name: kpack-installer
+description: Minimal Helm chart that installs (and uninstalls) kpack by applying the official release YAML via Helm hooks.
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
